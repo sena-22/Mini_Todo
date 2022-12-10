@@ -1,28 +1,27 @@
 import styled from "styled-components"
 import {FiMenu}  from 'react-icons/fi';
 import {RiMoonFill}  from 'react-icons/ri';
-import {useState} from 'react';
-import { Link} from "react-router-dom";
-import Menu from "./Menu";
+import { Link } from "react-router-dom";
+import Bar from './Bar'
 
 const Navi = styled.nav`
-    background-color: #495464;
-    width:390px;
+    background-color:#deb7ca;
+    width:393px;
     height:76px;
     display:flex;
     align-items: center;
     justify-content: space-between;
 
-    .menu {
+    /* .menu {
         color:#EEEEEE;
         width:49.62px;
         height:50px;
        margin-left: 30px;
        cursor: pointer;
-    }
+    } */
 
     .darkMode {
-        color:#B2D3E1;
+        color:#495464;;
         width:40px;
         height:40px;
         margin-right: 30px;   
@@ -35,7 +34,8 @@ const Header = ()=>{
         <>
         <Navi>
             <Link to ='/'>
-           <FiMenu className="menu" />
+           {/* <FiMenu className="menu" /> */}
+           <Bar />
            </Link>
            <RiMoonFill className="darkMode" />
         </Navi>

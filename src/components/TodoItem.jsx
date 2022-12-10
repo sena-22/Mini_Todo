@@ -1,18 +1,25 @@
+
+/* icons */
 import { BsCircle } from 'react-icons/bs';
 import { BsCheckCircle } from 'react-icons/bs';
-import styled from "styled-components"
-import React, {useState} from 'react';
+import {MdOutlineArrowForwardIos} from 'react-icons/md'
 
+import styled from "styled-components"
+import React from 'react';
+import {useState} from 'react'
+import EditTodo from './EditTodo';
 
 const  Item = styled.div`
-width:393px;
-height:90px;
-background-color: #495464;
-display: flex;
-align-items: center;
-:first-child{
-     margin-top: 50px;
-}
+    position:relative;
+    width:393px;
+    height:90px;
+    background-color: #495464;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    :first-child{
+        margin-top: 15px;
+    }
 
 :hover {
     background-color: #EEEEEE;
@@ -22,8 +29,10 @@ align-items: center;
     .done {
         text-decoration-color :  #727783;
     }
+    .editItem {
+        color:#727783;
+    }
 }
-
 
 .circle {
     color:#fff;
@@ -34,8 +43,9 @@ align-items: center;
 
 .title{
     color:#fff;
-    font-size: 25px;
+    font-size: 30px;
     margin-left: 100px;
+    position:absolute;
 }
 
 .done {
@@ -43,34 +53,42 @@ align-items: center;
     text-decoration-color :  #EEEEEE;
     color:#BBBBBE;
 }
+
+.editItem {
+    color:#fff;
+    font-size: 25px;
+    position: absolute;
+    top:37%;
+    left:81%;
+}
+
 `
 
-const TodoItem = ({id,title}) => {
-   const [isDone, setIsDone] = useState(false)
+const TodoItem = ({todo,handleComplete}) => {
 
+    const  [isEdit, setIsEdit]= useState(false);
 
     return (
-            <Item>
-               {isDone ? 
-                <>
-                  <BsCheckCircle className='circle'  onClick={()=>setIsDone(!isDone)}/>
-                  <div className="title done">
-                    {title}
-                  </div>
-                </>
-               : 
-               <>
-                 <BsCircle className='circle' onClick={()=>setIsDone(!isDone)}/>
-                 <div className="title">
-                    {title}
-                 </div>
-               </>
-
-                }
-           
-             
+        <Item>
+            {todo.isDone ? 
+            <>
+                <BsCheckCircle className='circle' onClick={()=>handleComplete(todo)} />
+                <div className="title done">
+                {todo.title}
+                </div>
+                <MdOutlineArrowForwardIos className="editItem"  onClick={()=>setIsEdit(!isEdit) }/>
+            </>
+            : 
+            <>
+                <BsCircle className='circle' onClick={()=>handleComplete(todo)}/>
+                <div className="title">
+                {todo.title}
+                </div>
+                <MdOutlineArrowForwardIos className="editItem" onClick={()=>setIsEdit(!isEdit)}/>
+            </>
+             }
+            {isEdit ? <EditTodo modalClose={()=>setIsEdit(!isEdit)} todo={todo}/> : null}
             </Item>
-
     )
 }
 

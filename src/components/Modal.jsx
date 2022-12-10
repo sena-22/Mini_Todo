@@ -1,9 +1,13 @@
-import styled from "styled-components"
-import {AiOutlinePlus}  from 'react-icons/ai'
-import {useState,useRef} from 'react'
+import styled from "styled-components";
+import {AiOutlinePlus}  from 'react-icons/ai';
+import {useState,useRef} from 'react';
+import { useDispatch } from "react-redux";
+
+import { add_todo } from "../reducers/actions";
+
 
 const ModalContainer = styled.div`
-    background-color: #BBBFCA;
+    background-color: #deb7ca;
     display:flex;
     width:350px;
     height:100px;
@@ -32,8 +36,22 @@ const TodoInput = styled.input`
         outline : none;
     }
 `
+
+const TodoInputButton = styled.button`
+    border:none;
+    background-color: transparent;
+
+    .submitButton {
+        width:40px;
+        height:40px;
+        color:#fff;
+    }
+    cursor: pointer;
+`
 //모달 컴포넌트
-const Modal = ({onCreate,setIsModalOpen}) =>{
+const Modal = ({setIsModalOpen}) =>{
+
+    const dispatch = useDispatch();
 
     const titleInput = useRef();
 
@@ -43,30 +61,40 @@ const Modal = ({onCreate,setIsModalOpen}) =>{
         setTitle(e.target.value)
     }
 
-    const handleSubmit = () => {
+    const dataId = useRef(5);
 
+    const handleSubmit = () => {
       //아무것도 입력하지 않았을 때 입력창에 포커싱 주고 리턴;
      if(title.length <1) {
         titleInput.current.focus();
         return;
      }
+     const todo = {
+        id: dataId.current,
+        title,
+        isDone: false,
+      };
+        dataId.current += 1;
+        dispatch(add_todo(todo));
 
-      onCreate(title);
-      setTitle('');
-      setIsModalOpen(false);
+        setTitle('');
+        setIsModalOpen(false);
+        console.log("submit!!")
     }
   
     return(
     <ModalContainer>
-    <TodoInput 
-    type="text" 
-    name="title" 
-    value={title} 
-    ref={titleInput}
-    onChange={handleChangeTitle}
-    placeholder="Write Todo.."
-    ></TodoInput>
-    <button onClick={handleSubmit}><AiOutlinePlus/></button>
+        <TodoInput 
+            type="text" 
+            name="title" 
+            value={title} 
+            ref={titleInput}
+            onChange={handleChangeTitle}
+            placeholder="Add Todo.."
+        ></TodoInput>
+        <TodoInputButton >
+            <AiOutlinePlus className="submitButton" onClick={handleSubmit}/>
+        </TodoInputButton>
     </ModalContainer>
     )
   }
