@@ -2,13 +2,11 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import {useState} from 'react'
 import styled from 'styled-components';
+
 import moment from 'moment';
-
-
 import { getStringDate } from '../util/date.js';
 
-
-const ClanedarContainer = styled.div`
+const CalenedarContainer = styled.div`
     height: 300px;
     margin-top: 20px; 
     margin-bottom:100px;
@@ -128,7 +126,7 @@ const MyCalendar = () => {
     console.log(stringDate);
 
     return (
-        <ClanedarContainer>
+        <CalenedarContainer>
             <StyledCalendar
             onChange={setDate} 
             value={date}
@@ -146,7 +144,7 @@ const MyCalendar = () => {
            <CurrentDate>
              {`${stringDate}   `}
             </CurrentDate>
-        </ClanedarContainer>
+        </CalenedarContainer>
     )
 }
 

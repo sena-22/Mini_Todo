@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import TodoItem from "../components/TodoItem";
 import styled from "styled-components"
 
-import {useState} from 'react';
+import React, {useState} from 'react';
 import Modal from '../components/Modal';
 import { useSelector,useDispatch } from "react-redux";
 import {complete} from '../reducers/actions'
@@ -32,9 +32,22 @@ const HomeContainer = styled.div`
   }
 `
 
+const filterOptionList = [
+  {value:"all",name:"전체"},
+  {value:"completed",name:"완료"},
+  {value:"not_started",name:" 할일"},
+]
+
+const ControlMenu = React.memo(({value, onChange, optionList}) => {
+return <select className="ControlMenu" value={value} onChange={(e)=>onChange(e.target.value)}>
+  {optionList.map((it,idx)=> (<option key={idx} value={it.value}>{it.name}</option>))}
+</select>
+})
+
 const Home = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos);
+  // console.log(todos)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,11 +55,34 @@ const Home = () => {
     dispatch(complete(todo))
   }
 
+  const [filter, setFilter] = useState('all');
+
+  const getProcessedDiaryList = () => {
+    //필터링용 함수
+    const filterCallback = (todo) => {
+        switch(filter) {
+          case 'all' :
+            return todo;
+          case 'completed' :
+            return todo.isDone === true;
+          case 'not_started' :
+            return todo.isDone === false;
+        }
+    }
+    const filteredList =  todos.filter((it)=>filterCallback(it))
+    return filteredList;
+  }
+
   return (
     <HomeContainer>
     <Header/>
+    <ControlMenu 
+      value={filter}
+      onChange={setFilter}
+      optionList={filterOptionList}
+    />
     <div>
-    {todos.map((todo,idx)=> (
+    {getProcessedDiaryList().map((todo,idx)=> (
       <TodoItem key={idx} todo ={todo} handleComplete={handleComplete}/>
       ))}
     </div>

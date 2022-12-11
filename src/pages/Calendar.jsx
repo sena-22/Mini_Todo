@@ -11,9 +11,7 @@ const CalendarContainer = styled.div`
     height: 852px;
     position: relative;
     align-items: center;
- 
 `
-
  const Calendar = () =>{
     return (
         <CalendarContainer>

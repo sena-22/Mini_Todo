@@ -6,21 +6,18 @@ import { FiMoon } from 'react-icons/fi';
 import { BsPerson } from 'react-icons/bs';
 import styled, { keyframes } from "styled-components"
 
+// const animate = keyframes`
+//   0% {
+//     background-color: #495464;
+//   }
+//   50% {
+//     background-color: #fff;
+//   }
+//   100% {
+//     background-color: #495464;
+//   }
 
-
-
-const animate = keyframes`
-  0% {
-    background-color: #495464;
-  }
-  50% {
-    background-color: #fff;
-  }
-  100% {
-    background-color: #495464;
-  }
-
-`
+// `
 const Circle = styled.div`
 /* margin-top : 126px; */
 margin-left:-70px;
@@ -31,7 +28,6 @@ border-left-style: hidden;
 border-radius : 0px 300px  300px 0px; */
 position : relative;
 top :15%;
-
 
 .border {
   margin-left:-300px;
@@ -149,10 +145,8 @@ const  MenuContainer = styled.div`
         top:95%;
     }
 `
+
 const Menu = () => {
-
-
-
   return (
     <MenuContainer>
     <Circle>

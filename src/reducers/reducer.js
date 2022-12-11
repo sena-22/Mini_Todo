@@ -26,7 +26,6 @@ const initialState = {
 };
 
 export const reducer = (state = initialState, action) => {
-  let newState = [];
   switch (action.type) {
     case ADD:
       return Object.assign({}, state, {

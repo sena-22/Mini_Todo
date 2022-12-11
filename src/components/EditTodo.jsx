@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import MyButton from './MyButton';
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import { useSelector,useDispatch } from 'react-redux';
 import {delete_todo, edit_todo} from '../reducers/actions'
 
@@ -81,12 +81,10 @@ const EditTodo = ({modalClose,todo}) => {
         modalClose()
     }
 
-
-  
-
     const handleRemove = () => {
         if(window.confirm('정말 삭제하시겠습니까?')){
             dispatch(delete_todo(sorted))
+            setEditTitle('');
             closeModal();
         } else {
             closeModal();
@@ -97,9 +95,7 @@ const EditTodo = ({modalClose,todo}) => {
       * 1. 수정 버튼을 누르면 div가 input으로 바뀐다.
       * 2. input에 content를 입력하고 확인 버튼을 누르면 
       * 3. setEditData가 실행돼서  handleSubmit이 실행된다
-      * 문제 1. sorted가 리렌더링 안됨 
       */
-
 
   const handleSubmit = () => {
     // console.log({id,editTitle,isDone});
@@ -112,7 +108,6 @@ const EditTodo = ({modalClose,todo}) => {
     }
   };
   
-
     return (
         <>
         {sorted && <EditContainer onClick={closeModal}>

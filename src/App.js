@@ -8,19 +8,6 @@ import Menu from "./pages/Menu";
 import Profile from "./pages/Profile";
 
 function App() {
-  //삭제하기
-  // const onRemove = (targetId) => {
-  //   const newTodoList = data.filter((el) => el.id !== targetId);
-  //   setData(newTodoList);
-  // };
-
-  //수정하기
-  // const onEdit = (targetId, editTitle) => {
-  //   setData(
-  //     data.map((el) => (el.id === targetId ? { ...el, title: editTitle } : el))
-  //   );
-  // };
-
   return (
     <BrowserRouter>
       <div className="App">
