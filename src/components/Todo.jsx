@@ -1,7 +1,9 @@
 import TodoItem from "../components/TodoItem";
 import { useSelector,useDispatch } from "react-redux";
 import styled from "styled-components"
-import {complete} from '../reducers/actions'
+import {complete,handle_date} from '../reducers/actions';
+import {useState,useEffect} from 'react'
+import { getStringDate } from "../util/date";
 
 const CompleteContainer = styled.div`
     background-color: #495464;
@@ -11,17 +13,33 @@ const CompleteContainer = styled.div`
 
 `
 const Todo = () => {
-    const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
+  const data = useSelector((state)=>state)
+
+  const baseTodos = data.state.todos
+  const baseDate = data.date
+
+  const [todos, setTodos] = useState(baseTodos);
+  const [filteredTodos, setFilteredTodos] = useState(todos)
+  
+  const stringDate = getStringDate(baseDate)
+
+  //날짜가 바뀔 때마다 todolist 변경
+  useEffect(()=>{
+    setFilteredTodos(todos.filter((e)=>(
+      getStringDate(e.date) === stringDate))
+    )
+  },[baseDate])
 
   const handleComplete = (todo) => {
     dispatch(complete(todo))
   }
 
+
   return (
       <CompleteContainer>
       <div>
-  {todos.map((todo,idx)=> (
+  {filteredTodos.map((todo,idx)=> (
     <TodoItem key={idx} todo ={todo} handleComplete={handleComplete}/>
       ))}
  </div>

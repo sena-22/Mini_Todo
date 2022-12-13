@@ -71,7 +71,7 @@ justify-content:space-around;
 `
 
 const EditTodo = ({modalClose,todo}) => {
-    const sorted = useSelector((state) => state.todos.find((el)=>el.id ===todo.id));
+    const sorted = useSelector((state) => state.state.todos.find((el)=>el.id ===todo.id));
     // const {id,title, isDone} = sorted;
     const [editTitle, setEditTitle] = useState(sorted.title);
     const [isEdit, setIsEdit] = useState(false);

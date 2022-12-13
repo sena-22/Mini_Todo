@@ -6,21 +6,25 @@ const initialState = {
       id: 1,
       title: "TODO 1",
       isDone: true,
+      date: 1670915349752,
     },
     {
       id: 2,
       title: "TODO 2",
       isDone: false,
+      date: 1670915349753,
     },
     {
       id: 3,
       title: "TODO 3",
       isDone: false,
+      date: 1670997349755,
     },
     {
       id: 4,
       title: "TODO 4",
       isDone: false,
+      date: 1670997349755,
     },
   ],
 };

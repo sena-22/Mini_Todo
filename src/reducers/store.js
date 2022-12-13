@@ -1,6 +1,6 @@
 import { legacy_createStore as createStore } from "redux";
-import { reducer } from "./reducer";
+import combineReducers from "./index";
 
-const store = createStore(reducer);
+const store = createStore(combineReducers);
 
 export default store;

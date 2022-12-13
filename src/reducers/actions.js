@@ -4,6 +4,8 @@ export const DELETE = "DELETE_TODO";
 export const COMPLETE = "COMPLETE_TODO";
 export const EDIT = "EDIT_TODO";
 
+export const HANDLEDATE = "HANDLE_DATE";
+
 export const add_todo = (todo) => {
   return {
     type: ADD,
@@ -11,6 +13,7 @@ export const add_todo = (todo) => {
       id: todo.id,
       title: todo.title,
       isDone: todo.isDone,
+      date: todo.date,
     },
   };
 };
@@ -26,13 +29,14 @@ export const complete = (todo) => {
   };
 };
 
-export const edit_todo = (id, title, isDone) => {
+export const edit_todo = (id, title, isDone, date) => {
   return {
     type: EDIT,
     todo: {
       id,
       title,
       isDone,
+      date,
     },
   };
 };
@@ -43,5 +47,12 @@ export const delete_todo = (todo) => {
     todo: {
       id: todo.id,
     },
+  };
+};
+
+export const handle_date = (date) => {
+  return {
+    type: HANDLEDATE,
+    date: date,
   };
 };

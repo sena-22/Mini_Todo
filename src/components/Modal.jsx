@@ -3,6 +3,7 @@ import {AiOutlinePlus}  from 'react-icons/ai';
 import {useState,useRef} from 'react';
 import { useDispatch } from "react-redux";
 
+
 import { add_todo } from "../reducers/actions";
 
 
@@ -51,6 +52,8 @@ const TodoInputButton = styled.button`
 //모달 컴포넌트
 const Modal = ({setIsModalOpen}) =>{
 
+
+
     const dispatch = useDispatch();
 
     const titleInput = useRef();
@@ -73,12 +76,12 @@ const Modal = ({setIsModalOpen}) =>{
         id: dataId.current,
         title,
         isDone: false,
+        date:new Date()
       };
-        dataId.current += 1;
-        dispatch(add_todo(todo));
-
-        setTitle('');
-        setIsModalOpen(false);
+      dispatch(add_todo(todo));
+      setTitle('');
+      setIsModalOpen(false);
+      dataId.current += 1;
         console.log("submit!!")
     }
   

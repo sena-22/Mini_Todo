@@ -8,6 +8,7 @@ import styled from "styled-components"
 import React from 'react';
 import {useState} from 'react'
 import EditTodo from './EditTodo';
+import { getStringDate } from '../util/date';
 
 const  Item = styled.div`
     position:relative;
@@ -44,8 +45,8 @@ const  Item = styled.div`
 .title{
     color:#fff;
     font-size: 30px;
-    margin-left: 100px;
-    position:absolute;
+    /* margin-left: 170px; */
+    /* position:absolute; */
 }
 
 .done {
@@ -62,27 +63,48 @@ const  Item = styled.div`
     left:81%;
 }
 
+.section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 65%;
+    .date {
+        font-size: 20px; text-decoration: none;
+        margin-bottom: 10px;
+        color:#fff;
+    }
+}
+
 `
 
 const TodoItem = ({todo,handleComplete}) => {
 
     const  [isEdit, setIsEdit]= useState(false);
 
+    const todoDate = getStringDate(todo.date);
+
     return (
         <Item>
             {todo.isDone ? 
             <>
                 <BsCheckCircle className='circle' onClick={()=>handleComplete(todo)} />
-                <div className="title done">
-                {todo.title}
+                <div className ="section ">
+                    <div className ="date done">{todoDate}</div>
+                    <div className="title done">
+                      {todo.title}
+                    </div>
                 </div>
                 <MdOutlineArrowForwardIos className="editItem"  onClick={()=>setIsEdit(!isEdit) }/>
             </>
             : 
             <>
                 <BsCircle className='circle' onClick={()=>handleComplete(todo)}/>
-                <div className="title">
-                {todo.title}
+                <div className ="section ">
+                    <div className ="date">{todoDate}</div>
+                    <div className="title">
+                      {todo.title}
+                    </div>
                 </div>
                 <MdOutlineArrowForwardIos className="editItem" onClick={()=>setIsEdit(!isEdit)}/>
             </>

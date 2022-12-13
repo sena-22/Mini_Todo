@@ -10,7 +10,7 @@ const CompleteContainer = styled.div`
     position: relative;
 `
 const Done = () => {
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector((state) => state.state.todos);
   const filtered = todos.filter((todo)=> todo.isDone === true)
 
   return (

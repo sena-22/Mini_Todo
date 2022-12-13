@@ -1,10 +1,13 @@
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import styled from 'styled-components';
 
 import moment from 'moment';
 import { getStringDate } from '../util/date.js';
+
+import {useDispatch,useSelector} from 'react-redux';
+import { handle_date } from '../reducers/actions.js';
 
 const CalenedarContainer = styled.div`
     height: 300px;
@@ -59,8 +62,8 @@ abbr {
 
 //오늘 날짜
   .react-calendar__tile--now {
-    background-color:whitesmoke;
-    color: white;
+    background-color:#deb7ca;
+    color: black;
   }
 
   .react-calendar__tile--now:enabled:hover,
@@ -117,13 +120,21 @@ const CurrentDate = styled.div`
   height:30px;
   top:100%;
   margin-top:50px;
-  
 `
 
 const MyCalendar = () => {
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(useSelector((state)=>state.date.date));
+
     const stringDate = getStringDate(date);
-    console.log(stringDate);
+  
+    const dispatch = useDispatch();
+
+    //1. date가 변화할 때마다 date 상태 변경 => useEffect(),  useDispatch(), useSelector()
+    //2. Todo 컴포넌트에서 받아서 해당하는 날짜만 표시(필터링)
+   useEffect(()=>{
+      dispatch(handle_date(date))
+    },[date])
+
 
     return (
         <CalenedarContainer>

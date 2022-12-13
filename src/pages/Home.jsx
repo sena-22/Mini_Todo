@@ -46,7 +46,7 @@ return <select className="ControlMenu" value={value} onChange={(e)=>onChange(e.t
 
 const Home = () => {
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector((state) => state.state.todos);
   // console.log(todos)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
